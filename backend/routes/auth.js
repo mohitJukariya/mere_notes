@@ -7,7 +7,6 @@ var jwt = require('jsonwebtoken')
 const { Router } = require('express')
 var fetchuser = require('../middleware/fetchUser')
 
-
 const JWT_SECRET = 'mohitisagoodb$oy'
 
 // ROUTE:1 Create a user using: POST "/api/auth/createuser" . NO LOGIN REQUIRED
@@ -108,16 +107,15 @@ router.post(
 
 // ROUTE:3 Get loggedin USer Details using "/api/auth/getuser" . LOGIN REQUIRED
 
-router.post('/getuser',fetchuser, async (req, res) => {
+router.post('/getuser', fetchuser, async (req, res) => {
   try {
-    userId = req.user.id;
+    userId = req.user.id
     const user = await User.findById(userId).select('-password')
-    res.send(user);
+    res.send(user)
   } catch (error) {
     console.error(error.message)
     res.status(500).send('Internal server occured')
   }
-
 })
 
 module.exports = router
