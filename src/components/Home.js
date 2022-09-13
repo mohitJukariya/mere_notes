@@ -1,11 +1,13 @@
 import React from 'react'
+import Notes from './Notes'
 
-function home() {
+function Home() {
   return (
     <div>
-        This is home
+      {/* Adding Notes Component here */}
+      <Notes />
     </div>
   )
 }
 
-export default home
+export default Home
