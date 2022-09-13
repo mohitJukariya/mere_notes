@@ -22,7 +22,7 @@ router.post(
     let success = false;
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
+      return res.status(400).json({ success, errors: errors.array() })
     }
 
     // Check wheather the user with this email exists already
@@ -32,7 +32,7 @@ router.post(
         success = false;
         return res
           .status(400)
-          .json({ error: 'Sorry a user with this email already exists' })
+          .json({ success, error: 'Sorry a user with this email already exists' })
       }
 
       const salt = await bcrypt.genSalt(10)
@@ -85,14 +85,14 @@ router.post(
         success = false
         return res
           .status(400)
-          .json({ error: 'Please try to login with the correct credentials' })
+          .json({ success, error: 'Please try to login with the correct credentials' })
       }
       const passwordCompare = await bcrypt.compare(password, user.password)
       if (!passwordCompare) {
         success = false
         return res
           .status(400)
-          .json({ error: 'Please try to login with the correct credentials' })
+          .json({ success, error: 'Please try to login with the correct credentials' })
       }
 
       const data = {
